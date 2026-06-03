@@ -2,312 +2,308 @@
 <html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的社畜人生 - Premium Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>我的社畜人生</title>
     <style>
         :root {
-            --zelda-bg: #0d1418;       /* 曠野之息深邃黑青色底 */
-            --zelda-card: #142229;     /* 神廟/希卡石板深卡片色 */
-            --zelda-teal: #00f0ff;     /* 標誌性遠古科技能量藍 */
-            --zelda-gold: #e5c158;     /* 神聖之光黃金色 */
-            --zelda-gold-dim: #9c823c; /* 暗金色 */
-            --text-light: #f0f4f5;     /* 乾淨白字 */
-            --text-dim: #8fa3ad;       /* 說明文字灰藍 */
-            --border-light: rgba(255, 255, 255, 0.1);
+            --game-bg: #0f141c;        /* 現代遊戲極致深藍底 */
+            --game-card: #18202c;      /* 現代扁平化高質感面板 */
+            --game-cyber: #00f0ff;     /* 螢光科技藍 */
+            --game-green: #39e6a0;     /* 生命值/初始數據綠 */
+            --game-gold: #ffc83b;      /* 神聖/史詩級裝備金 */
+            --game-accent: #ff4a6b;    /* 任務/警告紅 */
+            --text-main: #ffffff;      /* 主文字 */
+            --text-sub: #7a8b9e;       /* 副文字 */
+            --border-ui: rgba(255, 255, 255, 0.08);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, "微軟正黑體", sans-serif;
-            background-color: var(--zelda-bg);
-            color: var(--text-light);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--game-bg);
+            color: var(--text-main);
             margin: 0;
-            padding: 24px 16px;
+            padding: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-image: linear-gradient(180deg, #0d1418 0%, #070b0d 100%);
             min-height: 100vh;
+            box-sizing: border-box;
+            overflow-x: hidden;
         }
 
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
+            display: flex;
+            flex-direction: column;
             box-sizing: border-box;
         }
 
-        /* 薩爾達現代極簡標題風格 */
+        /* 現代遊戲式簡約標題 */
         h1 {
             text-align: center;
-            color: var(--text-light);
-            font-size: 22px;
-            font-weight: 300;
-            letter-spacing: 4px;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding-bottom: 12px;
-            user-select: none;
-            -webkit-user-select: none;
-            cursor: pointer;
+            color: var(--text-main);
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin: 8px 0 16px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--game-cyber);
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
         }
 
-        /* 希卡石板質感的現代卡片 */
-        .zelda-window {
-            background-color: var(--zelda-card);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-left: 4px solid var(--zelda-teal); /* 側邊能量條 */
-            padding: 22px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            position: relative;
-            transition: all 0.3s ease;
+        /* 現代開放世界遊戲面板 */
+        .game-panel {
+            background-color: var(--game-card);
+            border: 1px solid var(--border-ui);
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            box-sizing: border-box;
         }
 
         .welcome-screen {
             text-align: center;
-            padding: 40px 20px;
-            border-left: 1px solid rgba(0, 240, 255, 0.2);
-            border-top: 4px solid var(--zelda-teal);
+            padding: 30px 15px;
         }
 
-        /* Switch 現代質感按鈕 */
+        /* Modern UI 按鈕 */
         .btn {
-            background: transparent;
-            color: var(--text-light);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 14px 20px;
+            background: linear-gradient(90deg, #1f2d3d 0%, #151f2b 100%);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 12px;
             font-family: inherit;
-            font-size: 16px;
-            font-weight: 400;
-            letter-spacing: 2px;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
             cursor: pointer;
             width: 100%;
+            border-radius: 6px;
             box-sizing: border-box;
-            transition: all 0.2s ease;
-            margin-top: 15px;
-            position: relative;
-            background-color: rgba(255,255,255,0.02);
+            transition: all 0.15s ease;
+            margin-top: 12px;
         }
 
-        /* 點擊時呈現 Switch 菜單選取高亮發光感 */
         .btn:active {
-            background-color: var(--zelda-teal);
+            background: var(--game-cyber);
             color: #000;
-            border-color: var(--zelda-teal);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
-            font-weight: bold;
+            border-color: var(--game-cyber);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
         }
 
         .btn-bless {
-            border-color: var(--zelda-gold);
-            color: var(--zelda-gold);
-            background-color: rgba(229, 193, 88, 0.02);
+            border-color: var(--game-gold);
+            color: var(--game-gold);
+            background: rgba(255, 200, 59, 0.05);
         }
         
         .btn-bless:active {
-            background-color: var(--zelda-gold);
+            background: var(--game-gold);
             color: #000;
-            box-shadow: 0 0 15px rgba(229, 193, 88, 0.6);
+            box-shadow: 0 0 12px rgba(255, 200, 59, 0.4);
         }
 
-        /* 現代扁平化簡約表格 */
+        /* 一頁式緊湊型表格 */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
+            margin: 6px 0;
             text-align: center;
         }
 
         th, td {
-            padding: 12px 4px;
-            font-size: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 6px 2px;
+            font-size: 14px;
         }
 
         th {
-            color: var(--text-dim);
-            font-weight: 400;
-            font-size: 13px;
-            letter-spacing: 1px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-sub);
+            font-weight: 500;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-ui);
         }
 
-        /* 屬性數據發光藍 */
-        .value-highlight {
-            font-size: 18px;
+        /* 螢光數據發光效果 */
+        .val-baseline {
+            font-size: 16px;
             font-weight: bold;
-            color: var(--zelda-teal);
-            text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+            color: var(--game-green);
         }
 
-        /* 聖經經文神聖感排版 */
-        .goal-text {
-            color: var(--zelda-gold);
-            background: rgba(0, 0, 0, 0.2);
-            padding: 16px;
-            border-radius: 4px;
-            margin: 14px 0;
-            line-height: 1.6;
+        .val-goal {
             font-size: 15px;
-            letter-spacing: 1px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        /* 聖經應許卡片：插在中間不阻位 */
+        .promise-box {
+            color: var(--game-gold);
+            background: rgba(255, 200, 59, 0.06);
+            padding: 10px;
+            border-radius: 6px;
+            margin: 4px 0 10px 0;
+            line-height: 1.4;
+            font-size: 13px;
+            border: 1px solid rgba(255, 200, 59, 0.2);
             text-align: center;
-            border: 1px solid rgba(229, 193, 88, 0.15);
         }
 
-        .bless-list {
-            text-align: left;
-            display: inline-block;
-            margin: 10px 0;
-            font-size: 17px;
-            line-height: 2;
-            color: var(--zelda-gold);
+        .bless-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-top: 6px;
+            text-align: center;
         }
 
-        /* 現代極簡輸入框 */
+        .bless-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px;
+            font-size: 13px;
+            color: var(--game-gold);
+            border-radius: 4px;
+            border: 1px dashed rgba(255, 200, 59, 0.3);
+        }
+
+        /* 極簡指令輸入框 */
         .input-code {
             width: 100%;
-            padding: 14px;
+            padding: 10px;
             font-family: inherit;
-            font-size: 15px;
+            font-size: 14px;
             box-sizing: border-box;
-            background-color: rgba(0, 0, 0, 0.3);
-            color: var(--text-light);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 10px;
+            background-color: rgba(0, 0, 0, 0.2);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            margin-bottom: 4px;
             text-align: center;
             text-transform: uppercase;
             outline: none;
-            letter-spacing: 2px;
-            transition: border-color 0.2s;
         }
         
         .input-code:focus {
-            border-color: var(--zelda-teal);
+            border-color: var(--game-cyber);
         }
 
         .hidden {
             display: none !important;
         }
 
-        .window-title {
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--text-dim);
-            letter-spacing: 2px;
-            margin-bottom: 15px;
+        .panel-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-sub);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            display: flex;
-            align-items: center;
         }
 
-        .window-title::before {
-            content: "◆ ";
-            color: var(--zelda-teal);
-            margin-right: 6px;
-        }
-
-        /* Admin 控制台樣式 */
-        .admin-panel {
-            border: 1px dashed #ff3336;
-            border-left: 4px solid #ff3336;
-            background-color: rgba(255, 51, 54, 0.05);
-            padding: 15px;
-            margin-top: 30px;
+        /* Admin 面板 */
+        .admin-box {
+            border: 1px dashed var(--game-accent);
+            background-color: rgba(255, 74, 107, 0.05);
+            padding: 10px;
+            margin-top: 10px;
             text-align: center;
+            border-radius: 6px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1 id="game-title" onclick="handleTitleClick()">MY RETROGRADE LIFE</h1>
+    <h1 id="game-title" onclick="handleTitleClick()">我的社畜人生</h1>
 
-    <div id="start-screen" class="zelda-window welcome-screen">
-        <p style="font-size: 15px; line-height: 1.8; margin-bottom: 30px; color: var(--text-dim); letter-spacing: 1px;">
-            [ SYSTEM REPORT ]<br><br>
-            歡迎進入《我的社畜人生》。<br>
-            命運之輪已準備就緒，請點擊下方按鈕，加載屬於你嘅初始屬性與人生召命。
+    <div id="start-screen" class="game-panel welcome-screen">
+        <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px; color: var(--text-sub);">
+            [ 系統提示 ]<br>
+            現實關卡極具挑戰，世界線已準備就緒。<br>請加載屬於你嘅初始數據與人生終極目標。
         </p>
         <button class="btn" onclick="drawFate()">加載專屬劇本</button>
     </div>
 
     <div id="main-screen" class="hidden">
         
-        <div class="zelda-window">
-            <div class="window-title">STATUS (初始數據)</div>
+        <div class="game-panel">
+            <div class="panel-label" style="color: var(--game-green);">◆ CURRENT STATUS (初始數據)</div>
             <table>
                 <tr>
                     <th>金錢</th><th>愛情</th><th>親情</th><th>智慧</th><th>靈命</th><th>健康</th>
                 </tr>
                 <tr>
-                    <td id="b-money" class="value-highlight">-</td>
-                    <td id="b-love" class="value-highlight">-</td>
-                    <td id="b-family" class="value-highlight">-</td>
-                    <td id="b-wisdom" class="value-highlight">-</td>
-                    <td id="b-spirit" class="value-highlight">-</td>
-                    <td id="b-health" class="value-highlight">-</td>
-                </tr>
-            </table>
-            <p style="font-size: 12px; color: var(--text-dim); text-align: center; margin: 8px 0 0 0; letter-spacing: 0.5px;">*請將以上屬性抄錄至實體計分表起步點</p>
-        </div>
-
-        <div class="zelda-window">
-            <div class="window-title" id="admin-trigger" onclick="handleAdminClick()" style="cursor: pointer; user-select: none; -webkit-user-select: none;">MAIN QUEST (終極人生目標)</div>
-            <div id="goal-name" class="goal-text">-</div>
-            <table>
-                <tr>
-                    <th>金錢</th><th>愛情</th><th>親情</th><th>智慧</th><th>靈命</th><th>健康</th>
-                </tr>
-                <tr>
-                    <td id="g-money" style="color: #fff;">-</td>
-                    <td id="g-love" style="color: #fff;">-</td>
-                    <td id="g-family" style="color: #fff;">-</td>
-                    <td id="g-wisdom" style="color: #fff;">-</td>
-                    <td id="g-spirit" style="color: #fff;">-</td>
-                    <td id="g-health" style="color: #fff;">-</td>
+                    <td id="b-money" class="val-baseline">-</td>
+                    <td id="b-love" class="val-baseline">-</td>
+                    <td id="b-family" class="val-baseline">-</td>
+                    <td id="b-wisdom" class="val-baseline">-</td>
+                    <td id="b-spirit" class="val-baseline">-</td>
+                    <td id="b-health" class="val-baseline">-</td>
                 </tr>
             </table>
         </div>
 
-        <div id="bless-display-zone" class="zelda-window hidden" style="border-color: var(--zelda-gold); border-left-color: var(--zelda-gold); background-color: rgba(229, 193, 88, 0.03);">
-            <div class="window-title" style="color: var(--zelda-gold); font-weight: bold;">DIVINE COVENANT (神的應許已解鎖)</div>
-            <div class="goal-text" style="font-size: 14px; margin-bottom: 15px;">「我必與你同在，無論你往哪裏去，我必保佑你...我總不離棄你，直到我成全了向你所應許的。」<br><span style="font-size: 12px; opacity: 0.8;">— 創世記 28:15</span></div>
-            <p style="font-size: 14px; color: var(--text-light); margin: 0 0 10px 0;">你已白白獲得終極目標 50% 的屬性加成：</p>
-            <div id="bless-rewards" class="bless-list">
+        <div id="bless-display-zone" class="game-panel hidden" style="border-color: var(--game-gold); background: linear-gradient(180deg, rgba(255,200,59,0.05) 0%, rgba(24,32,44,1) 100%);">
+            <div class="panel-label" style="color: var(--game-gold); margin-bottom: 6px;">◆ DIVINE COVENANT (已解鎖恩典應許)</div>
+            <div class="promise-box">
+                「我必與你同在...我總不離棄你，直到我成全了向你所應許的。」<br>
+                <span style="font-size: 11px; opacity: 0.7;">— 創世記 28:15</span>
+            </div>
+            <div id="bless-rewards" class="bless-grid">
                 </div>
-            <p style="font-weight: bold; color: var(--zelda-gold); font-size: 13px; margin: 12px 0 0 0; text-align: center; letter-spacing: 0.5px;">⚠️ 請將加成點數加入實體計分表作最後衝刺！</p>
         </div>
 
-        <div id="bless-trigger-zone" class="zelda-window hidden" style="border-color: var(--accent-color); border-left-color: var(--accent-color); text-align: center;">
-            <div class="window-title" style="color: var(--accent-color);">ENTER DECRYPT CODE (開啟恩典)</div>
-            <input type="text" id="bless-code" class="input-code" placeholder="請輸入神秘代碼">
-            <button class="btn btn-bless" onclick="checkBlessCode()">解鎖恩典應許</button>
+        <div class="game-panel">
+            <div class="panel-label" id="admin-trigger" onclick="handleAdminClick()" style="cursor: pointer; user-select: none; color: var(--game-cyber);">◆ MAIN QUEST (終極人生目標)</div>
+            <div id="goal-name" style="font-size: 13px; color: var(--text-main); background: rgba(0,0,0,0.15); padding: 8px 10px; border-radius: 4px; margin-bottom: 8px; line-height: 1.4; border-left: 3px solid var(--game-cyber);">
+                -
+            </div>
+            <table>
+                <tr>
+                    <th>金錢</th><th>愛情</th><th>親情</th><th>智慧</th><th>靈命</th><th>健康</th>
+                </tr>
+                <tr>
+                    <td id="g-money" class="val-goal">-</td>
+                    <td id="g-love" class="val-goal">-</td>
+                    <td id="g-family" class="val-goal">-</td>
+                    <td id="g-wisdom" class="val-goal">-</td>
+                    <td id="g-spirit" class="val-goal">-</td>
+                    <td id="g-health" class="val-goal">-</td>
+                </tr>
+            </table>
         </div>
 
-        <div id="admin-panel" class="admin-panel hidden">
-            <div style="color: #ff3336; font-size: 12px; font-weight: bold; letter-spacing: 2px; margin-bottom: 10px;">[ ADMIN CONTROL PANEL ]</div>
-            <button class="btn" style="border-color: #ff3336; color: #ff3336; margin-top: 0; background-color: rgba(255,51,54,0.02);" onclick="resetAllData()">重置所有數據 (允許重抽)</button>
+        <div id="bless-trigger-zone" class="game-panel hidden" style="border-color: var(--game-accent); text-align: center; padding: 10px;">
+            <div class="panel-label" style="color: var(--game-accent); margin-bottom: 6px;">◆ SECURITY LOCK (開啟恩典)</div>
+            <input type="text" id="bless-code" class="input-code" placeholder="輸入神秘代碼">
+            <button class="btn btn-bless" style="margin-top: 4px; padding: 8px;" onclick="checkBlessCode()">解鎖應許</button>
+        </div>
+
+        <div id="admin-panel" class="admin-box hidden">
+            <button class="btn" style="border-color: var(--game-accent); color: var(--game-accent); margin-top: 0; padding: 6px; font-size: 12px; background: none;" onclick="resetAllData()">重置數據 (重新抽籤)</button>
         </div>
 
     </div>
 </div>
 
 <script>
-    // 3 套劇本數據
     const blueprints = {
         1: {
             baseline: { money: 5, love: 1, family: 3, wisdom: 1, spirit: 1, health: 1 },
-            goal: { name: "「你現在躺臥之地，我要將它賜給你和你的後裔。」(創世記 28:13)", money: 20, love: 10, family: 0, wisdom: 0, spirit: 20, health: 0 },
+            goal: { name: "「你現在躺臥之地，我要將它賜給你和你的後裔。」(創 28:13)", money: 20, love: 10, family: 0, wisdom: 0, spirit: 20, health: 0 },
             bless: { money: 10, love: 5, family: 0, wisdom: 0, spirit: 10, health: 0 }
         },
         2: {
             baseline: { money: 3, love: 5, family: 1, wisdom: 1, spirit: 1, health: 1 },
-            goal: { name: "「你的後裔必像地上的塵沙，必向東西南北開展。」(創世記 28:14)", money: 0, love: 20, family: 10, wisdom: 0, spirit: 20, health: 0 },
+            goal: { name: "「你的後裔必像地上的塵沙，必向東西南北開展。」(創 28:14)", money: 0, love: 20, family: 10, wisdom: 0, spirit: 20, health: 0 },
             bless: { money: 0, love: 10, family: 5, wisdom: 0, spirit: 10, health: 0 }
         },
         3: {
             baseline: { money: 1, love: 3, family: 5, wisdom: 1, spirit: 1, health: 1 },
-            goal: { name: "「我必與你同在，無論你往哪裏去，我必保佑你，領你歸回這地。」(創世記 28:15)", money: 0, love: 0, family: 0, wisdom: 20, spirit: 20, health: 10 },
+            goal: { name: "「我必與你同在，無論你往哪裏去，我必保佑你...」(創 28:15)", money: 0, love: 0, family: 0, wisdom: 20, spirit: 20, health: 10 },
             bless: { money: 0, love: 0, family: 0, wisdom: 10, spirit: 10, health: 5 }
         }
     };
@@ -328,7 +324,7 @@
         }
     };
 
-    // 玩家密技：連續點擊大標題 5 次開啟密碼輸入框
+    // 連擊大標題 5 次開啟密碼輸入框
     function handleTitleClick() {
         if (!localStorage.getItem('simLife_dramaId')) return;
         if (localStorage.getItem('simLife_isBlessed') === 'true') return;
@@ -336,33 +332,29 @@
         titleClickCount++;
         if (titleClickCount >= 5) {
             document.getElementById('bless-trigger-zone').classList.remove('hidden');
-            document.getElementById('bless-trigger-zone').scrollIntoView({ behavior: 'smooth' });
             titleClickCount = 0; 
         }
     }
 
-    // 後台密技：連續點擊 MAIN QUEST 5 次開啟 Admin 面板
+    // 連擊 MAIN QUEST 5 次開啟 Admin 面板
     function handleAdminClick() {
         if (!localStorage.getItem('simLife_dramaId')) return;
 
         adminClickCount++;
         if (adminClickCount >= 5) {
             document.getElementById('admin-panel').classList.remove('hidden');
-            document.getElementById('admin-panel').scrollIntoView({ behavior: 'smooth' });
             adminClickCount = 0;
         }
     }
 
-    // 管理員重置數據功能
     function resetAllData() {
-        if (confirm("確定要清除當前數據並重新抽籤嗎？(此操作不可撤銷)")) {
+        if (confirm("確定要重置數據並重新抽籤嗎？")) {
             localStorage.removeItem('simLife_dramaId');
             localStorage.removeItem('simLife_isBlessed');
             window.location.reload();
         }
     }
 
-    // 加密級別高強度隨機抽取
     function drawFate() {
         const array = new Uint32Array(1);
         window.crypto.getRandomValues(array);
@@ -372,7 +364,6 @@
         showMainScreen(randomId);
     }
 
-    // 渲染數據
     function showMainScreen(id) {
         const data = blueprints[id];
         document.getElementById('start-screen').classList.add('hidden');
@@ -394,7 +385,6 @@
         document.getElementById('goal-name').innerText = data.goal.name;
     }
 
-    // 驗證密碼
     function checkBlessCode() {
         const inputCode = document.getElementById('bless-code').value.trim().toUpperCase();
         
@@ -405,13 +395,11 @@
             renderBlessingValues(id);
             document.getElementById('bless-trigger-zone').classList.add('hidden');
             document.getElementById('bless-display-zone').classList.remove('hidden');
-            document.getElementById('bless-display-zone').scrollIntoView({ behavior: 'smooth' });
         } else {
-            alert("[ ERROR ] CODE INVALID. PLEASE TRY AGAIN.");
+            alert("[ ERROR ] CODE INVALID.");
         }
     }
 
-    // 產生賜福點數
     function renderBlessingValues(id) {
         const data = blueprints[id];
         const blessData = data.bless;
@@ -420,7 +408,7 @@
         
         for (let key in blessData) {
             if (blessData[key] > 0) {
-                rewardsHtml += `<div style="margin-bottom: 4px;">◆ <strong>${translate[key]}</strong> +${blessData[key]}</div>`;
+                rewardsHtml += `<div class="bless-item">◆ ${translate[key]} +${blessData[key]}</div>`;
             }
         }
         document.getElementById('bless-rewards').innerHTML = rewardsHtml;
