@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>模擬人生：命運與恩典</title>
+    <title>我的社畜人生 - Retro RPG</title>
     <style>
         :root {
-            --bg-color: #fcf8f2;
-            --card-bg: #ffffff;
-            --primary-color: #2e7d32;
-            --text-color: #333333;
-            --accent-color: #d84315;
-            --border-color: #e0e0e0;
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --text-color: #ffffff;
+            --primary-color: #45f3ff; /* 經典科技藍/綠光 */
+            --accent-color: #ff3366;  /* 警告/體力低落紅 */
+            --gold-color: #ffcc00;    /* 寶箱/恩典金 */
+            --border-color: #ffffff;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: "Courier New", Courier, monospace, "微軟正黑體";
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
@@ -23,6 +24,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            image-rendering: pixelated;
         }
 
         .container {
@@ -31,141 +33,150 @@
             box-sizing: border-box;
         }
 
+        /* RPG 像素風大標題 */
         h1 {
             text-align: center;
             color: var(--primary-color);
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0px #000;
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: pointer;
         }
 
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
+        /* 經典 RPG 對話框/視窗邊框 style */
+        .rpg-window {
+            background-color: #050811;
+            border: 4px solid var(--border-color);
+            box-shadow: inset 0 0 0 2px #000, 0 6px 0px rgba(0,0,0,0.5);
+            border-radius: 0px; /* 舊遊戲一定要方方正正 */
             padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
         .welcome-screen {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 15px;
         }
 
+        /* RPG 選擇/指令按鈕 */
         .btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 14px 28px;
+            background-color: #1f2833;
+            color: #fff;
+            border: 4px solid var(--border-color);
+            box-shadow: inset 0 0 0 2px #000;
+            padding: 12px 20px;
+            font-family: inherit;
             font-size: 18px;
             font-weight: bold;
-            border-radius: 8px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 4px 6px rgba(46, 125, 50, 0.2);
-            transition: background 0.2s;
+            box-sizing: border-box;
+            text-transform: uppercase;
+            margin-top: 10px;
         }
 
+        /* 按鈕滑過或撳住：模擬 RPG 選取游標箭頭 */
         .btn:active {
-            background-color: #1b5e20;
+            background-color: var(--primary-color);
+            color: #000;
+            border-color: #fff;
         }
 
         .btn-bless {
-            background-color: var(--accent-color);
-            box-shadow: 0 4px 6px rgba(216, 67, 21, 0.2);
-            margin-top: 15px;
+            border-color: var(--gold-color);
+            color: var(--gold-color);
         }
-
+        
         .btn-bless:active {
-            background-color: #b71c1c;
+            background-color: var(--gold-color);
+            color: #000;
         }
 
+        /* 經典遊戲數據表格 */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
             text-align: center;
+            background-color: #000;
         }
 
         th, td {
-            border: 1px solid var(--border-color);
-            padding: 10px 5px;
-            font-size: 16px;
+            border: 2px solid var(--border-color);
+            padding: 10px 4px;
+            font-size: 15px;
         }
 
         th {
-            background-color: #f5f5f5;
-            font-weight: 600;
+            background-color: #111;
+            color: var(--primary-color);
+            font-weight: normal;
         }
 
+        /* 數值高亮：好似打大佬爆擊咁 */
         .value-highlight {
             font-size: 18px;
             font-weight: bold;
-            color: var(--primary-color);
+            color: #00ffcc;
+            text-shadow: 1px 1px 0px #000;
         }
 
+        /* 任務劇本：好似 NPC 對話框 */
         .goal-text {
-            font-style: italic;
-            color: #555;
-            background: #f9f9f9;
+            color: #fff;
+            background: #111;
             padding: 12px;
-            border-left: 4px solid var(--primary-color);
+            border: 2px dashed var(--primary-color);
+            margin: 12px 0;
+            line-height: 1.5;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        .bless-list {
+            text-align: left;
+            display: inline-block;
             margin: 10px 0;
-            line-height: 1.4;
+            font-size: 18px;
+            line-height: 2;
+            color: var(--gold-color);
+            text-shadow: 1px 1px 0px #000;
+        }
+
+        /* 密碼輸入框：黑客/指令台風格 */
+        .input-code {
+            width: 100%;
+            padding: 12px;
+            font-family: inherit;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #000;
+            color: var(--primary-color);
+            border: 3px solid var(--border-color);
+            margin-bottom: 10px;
+            text-align: center;
+            text-transform: uppercase;
+            outline: none;
+        }
+        
+        .input-code:focus {
+            border-color: var(--primary-color);
         }
 
         .hidden {
             display: none !important;
         }
 
-        /* 彈出視窗樣式 */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .modal {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-            border: 3px solid #ffd700;
-        }
-
-        .modal h2 {
-            color: var(--accent-color);
-            margin-top: 0;
-        }
-
-        .bless-list {
-            text-align: left;
-            display: inline-block;
-            margin: 15px 0;
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        .input-code {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            box-sizing: border-box;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            margin-bottom: 10px;
-            text-align: center;
+        .window-title {
+            font-size: 14px;
+            color: #888;
+            margin-top: -5px;
+            margin-bottom: 15px;
             text-transform: uppercase;
         }
     </style>
@@ -173,21 +184,29 @@
 <body>
 
 <div class="container">
-    <h1>📜 模擬人生：命源與召命</h1>
+    <h1 id="game-title" onclick="handleTitleClick()">▶ 我的社畜人生</h1>
 
-    <div id="start-screen" class="card welcome-screen">
-        <p style="font-size: 16px; line-height: 1.5; color: #666;">歡迎來到模擬人生體驗。<br>每個人出生皆有不同的起跑線與人生召命，請點擊下方按鈕領取你的身分說明書。</p>
-        <button class="btn" onclick="drawFate()">抽取人生劇本</button>
+    <div id="start-screen" class="rpg-window welcome-screen">
+        <p style="font-size: 16px; line-height: 1.8; margin-bottom: 25px;">
+            [ SYSTEM REPORT ]<br>
+            歡迎來到《我的社畜人生》。<br>
+            現實關卡極度殘酷，世界線已隨機分配。請點擊下方加載你嘅「社畜天賦」與「終極召命」。
+        </p>
+        <button class="btn" onclick="drawFate()">▶ NEW GAME (抽取劇本)</button>
     </div>
 
     <div id="main-screen" class="hidden">
         
-        <div class="card">
-            <h3 style="margin-top: 0; color: #555;">🔹 你的初始數據 (Baseline)</h3>
-            <p style="font-size: 13px; color: #888; margin-top: -5px;">*請將以下數值填入實體營刊的起步點</p>
-            <table>
+        <div class="rpg-window">
+            <div class="window-title">▼ STATUS (初始數據)</div>
+            <table style="border-color: var(--primary-color);">
                 <tr>
-                    <th>金錢</th><th>愛情</th><th>親情</th><th>智慧</th><th>靈命</th><th>健康</th>
+                    <th style="border-color: var(--primary-color);">金錢</th>
+                    <th style="border-color: var(--primary-color);">愛情</th>
+                    <th style="border-color: var(--primary-color);">親情</th>
+                    <th style="border-color: var(--primary-color);">智慧</th>
+                    <th style="border-color: var(--primary-color);">靈命</th>
+                    <th style="border-color: var(--primary-color);">健康</th>
                 </tr>
                 <tr>
                     <td id="b-money" class="value-highlight">-</td>
@@ -198,10 +217,11 @@
                     <td id="b-health" class="value-highlight">-</td>
                 </tr>
             </table>
+            <p style="font-size: 12px; color: #888; text-align: center; margin: 5px 0 0 0;">*請將以上數值抄錄至實體計分表起步點</p>
         </div>
 
-        <div class="card">
-            <h3 style="margin-top: 0; color: #555;">🎯 終極人生目標 (Goal)</h3>
+        <div class="rpg-window">
+            <div class="window-title">▼ MAIN QUEST (終極人生目標)</div>
             <div id="goal-name" class="goal-text">-</div>
             <table>
                 <tr>
@@ -218,32 +238,25 @@
             </table>
         </div>
 
-        <div id="bless-trigger-zone" class="card" style="text-align: center;">
-            <h4 style="margin: 0 0 10px 0; color: var(--accent-color);">✨ 第三回合恩典時刻</h4>
-            <input type="text" id="bless-code" class="input-code" placeholder="請輸入台上公佈的恩典密碼">
-            <button class="btn btn-bless" onclick="checkBlessCode()">領取神賜福</button>
+        <div id="bless-display-zone" class="rpg-window hidden" style="border-color: var(--gold-color); background-color: #0f1100;">
+            <div class="window-title" style="color: var(--gold-color);">▼ DIVINE BLESSING (神聖賜福已激活)</div>
+            <p style="font-size: 14px; margin: 5px 0 10px 0;">「人的盡頭，神的開端。」已無條件獲得 50% 屬性加成：</p>
+            <div id="bless-rewards" class="bless-list">
+                </div>
+            <p style="font-weight: bold; color: var(--gold-color); font-size: 13px; margin: 10px 0 0 0; text-align: center;">⚠️ 請立刻將加成點數加入實體計分表！</p>
         </div>
 
-        <div id="bless-status-zone" class="card hidden" style="text-align: center; border: 2px solid #ffd700; background: #fffdf0;">
-            <h4 style="margin: 0; color: var(--accent-color);">🎉 已成功承接神的賜福應許</h4>
-            <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">（加成點數已抄錄至實體計分表）</p>
+        <div id="bless-trigger-zone" class="rpg-window hidden" style="border-color: var(--accent-color); text-align: center;">
+            <div class="window-title" style="color: var(--accent-color);">▼ ENTER DECRYPT CODE (解鎖恩典)</div>
+            <input type="text" id="bless-code" class="input-code" placeholder="請輸入神秘代碼">
+            <button class="btn btn-bless" onclick="checkBlessCode()">▶ EXECUTE (領取賜福)</button>
         </div>
-    </div>
-</div>
 
-<div id="bless-modal" class="overlay hidden">
-    <div class="modal">
-        <h2>🎉 神的應許臨到！</h2>
-        <p>「人的盡頭，神的開端。」因著神的信實，你白白獲得了終極目標 50% 的恩典加成：</p>
-        <div id="bless-rewards" class="bless-list">
-            </div>
-        <p style="font-weight: bold; color: var(--accent-color); font-size: 15px;">⚠️ 請立刻將以上點數加進你的實體計分表！</p>
-        <button class="btn" style="margin-top: 10px;" onclick="closeModal()">確認並返回</button>
     </div>
 </div>
 
 <script>
-    // 定義 3 套人生劇本數據
+    // 3 套人生劇本數據
     const blueprints = {
         1: {
             baseline: { money: 5, love: 1, family: 3, wisdom: 1, spirit: 1, health: 1 },
@@ -262,39 +275,47 @@
         }
     };
 
-    // 預設的恩典解鎖密碼（大小寫皆可）
-    const CORRECT_CODE = "GRACE";
+    const CORRECT_CODE = "GRACE"; 
+    let titleClickCount = 0;      
 
-    // 網頁載入時檢查是否已經抽過角色
     window.onload = function() {
         const savedId = localStorage.getItem('simLife_dramaId');
         if (savedId) {
             showMainScreen(savedId);
         }
         
-        // 檢查是否已經拿過賜福
-        if (localStorage.getItem('simLife_isBlessed') === 'true') {
-            document.getElementById('bless-trigger-zone').classList.add('hidden');
-            document.getElementById('bless-status-zone').classList.remove('hidden');
+        if (localStorage.getItem('simLife_isBlessed') === 'true' && savedId) {
+            renderBlessingValues(savedId);
+            document.getElementById('bless-display-zone').classList.remove('hidden');
         }
     };
 
-    // 抽取劇本邏輯
+    function handleTitleClick() {
+        if (!localStorage.getItem('simLife_dramaId')) return;
+        if (localStorage.getItem('simLife_isBlessed') === 'true') return;
+
+        titleClickCount++;
+        if (titleClickCount >= 5) {
+            document.getElementById('bless-trigger-zone').classList.remove('hidden');
+            document.getElementById('bless-trigger-zone').scrollIntoView({ behavior: 'smooth' });
+            titleClickCount = 0; 
+        }
+    }
+
     function drawFate() {
-        // 隨機抽 1 到 3
-        const randomId = Math.floor(Math.random() * 3) + 1;
+        const array = new Uint32Array(1);
+        window.crypto.getRandomValues(array);
+        const randomId = (array[0] % 3) + 1;
+        
         localStorage.setItem('simLife_dramaId', randomId);
         showMainScreen(randomId);
     }
 
-    // 渲染主畫面數據
     function showMainScreen(id) {
         const data = blueprints[id];
-        
         document.getElementById('start-screen').classList.add('hidden');
         document.getElementById('main-screen').classList.remove('hidden');
 
-        // 填入 Baseline
         document.getElementById('b-money').innerText = data.baseline.money;
         document.getElementById('b-love').innerText = data.baseline.love;
         document.getElementById('b-family').innerText = data.baseline.family;
@@ -302,55 +323,43 @@
         document.getElementById('b-spirit').innerText = data.baseline.spirit;
         document.getElementById('b-health').innerText = data.baseline.health;
 
-        // 填入 Goal
-        document.getElementById('goal-name').innerText = data.goal.name;
         document.getElementById('g-money').innerText = data.goal.money;
         document.getElementById('g-love').innerText = data.goal.love;
         document.getElementById('g-family').innerText = data.goal.family;
         document.getElementById('g-wisdom').innerText = data.goal.wisdom;
         document.getElementById('g-spirit').innerText = data.goal.spirit;
         document.getElementById('g-health').innerText = data.goal.health;
+        document.getElementById('goal-name').innerText = data.goal.name;
     }
 
-    // 驗證第三 Round 密碼
     function checkBlessCode() {
         const inputCode = document.getElementById('bless-code').value.trim().toUpperCase();
         
         if (inputCode === CORRECT_CODE) {
-            triggerBlessing();
+            const id = localStorage.getItem('simLife_dramaId');
+            localStorage.setItem('simLife_isBlessed', 'true');
+            
+            renderBlessingValues(id);
+            document.getElementById('bless-trigger-zone').classList.add('hidden');
+            document.getElementById('bless-display-zone').classList.remove('hidden');
+            document.getElementById('bless-display-zone').scrollIntoView({ behavior: 'smooth' });
         } else {
-            alert("密碼不正確，時候未到或請留意台上公佈！");
+            alert("[ ERROR ] CODE INVALID. TRY AGAIN.");
         }
     }
 
-    // 觸發賜福彈窗
-    function triggerBlessing() {
-        const id = localStorage.getItem('simLife_dramaId');
+    function renderBlessingValues(id) {
         const data = blueprints[id];
         const blessData = data.bless;
-        
         let rewardsHtml = "";
-        const translate = { money: "金錢", love: "愛情", family: "親情", wisdom: "智慧", spirit: "靈命", health: "健康" };
+        const translate = { money: "金錢 MONEY", love: "愛情 LOVE", family: "親情 FAMILY", wisdom: "智慧 WISDOM", spirit: "靈命 SPIRIT", health: "健康 HP" };
         
-        // 產生加成清單
         for (let key in blessData) {
             if (blessData[key] > 0) {
-                rewardsHtml += `<div>💰 <strong>${translate[key]}</strong>：+${blessData[key]} 點</div>`;
+                rewardsHtml += `<div style="margin-bottom: 6px;">▶ <strong>${translate[key]}</strong> +${blessData[key]}</div>`;
             }
         }
-
         document.getElementById('bless-rewards').innerHTML = rewardsHtml;
-        document.getElementById('bless-modal').classList.remove('hidden');
-
-        // 儲存狀態，防止重複領取
-        localStorage.setItem('simLife_isBlessed', 'true');
-        document.getElementById('bless-trigger-zone').classList.add('hidden');
-        document.getElementById('bless-status-zone').classList.remove('hidden');
-    }
-
-    // 關閉彈窗
-    function closeModal() {
-        document.getElementById('bless-modal').classList.add('hidden');
     }
 </script>
 
